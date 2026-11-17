@@ -8,9 +8,9 @@
 
     <h2>Calcolatrice Semplice</h2>
     
-    <input type="text" id="campoTesto" placeholder="Es: 10 + 5">
+    <input type="text" id="campoTesto">
     
-    <!-- Pulsanti per inserire i segni -->
+    
     <div style="margin-top: 10px;">
         <button onclick="aggiungiSegno('+')">+</button>
         <button onclick="aggiungiSegno('-')">-</button>
@@ -22,7 +22,7 @@
     <div id="boxRisultato" style="margin-top: 15px; font-weight: bold;"></div>
 
     <script>
-        // Aggiunge il segno cliccato al campo di testo
+       
         function aggiungiSegno(segno) {
             document.getElementById("campoTesto").value += segno;
         }
@@ -33,19 +33,19 @@
             
             let operatore = "";
             
-            // 1. Cerchiamo quale segno è stato inserito
+          
             if (espressione.includes('+')) operatore = '+';
             else if (espressione.includes('-')) operatore = '-';
             else if (espressione.includes('*')) operatore = '*';
             else if (espressione.includes('/')) operatore = '/';
 
-            // 2. Dividiamo l'espressione usando il segno trovato
+            
             let parti = espressione.split(operatore);
             let num1 = Number(parti[0]);
             let num2 = Number(parti[1]);
             let totale = 0;
 
-            // 3. Eseguiamo l'operazione con lo switch case
+            
             switch (operatore) {
                 case '+':
                     totale = num1 + num2;
@@ -68,7 +68,7 @@
                     return;
             }
 
-            // 4. Controlliamo che i numeri siano validi
+            
             if (isNaN(totale)) {
                 box.innerText = "C'è un errore nei numeri inseriti!";
             } else {
