@@ -6,44 +6,76 @@
 </head>
 <body>
 
-
     <h2>Calcolatrice Semplice</h2>
-   
     
-    <input type="text" id="campoTesto">
-    <button onclick="calcolaRisultato()">Calcola</button>
-
-
+    <input type="text" id="campoTesto" placeholder="Es: 10 + 5">
     
+    <!-- Pulsanti per inserire i segni -->
+    <div style="margin-top: 10px;">
+        <button onclick="aggiungiSegno('+')">+</button>
+        <button onclick="aggiungiSegno('-')">-</button>
+        <button onclick="aggiungiSegno('*')">*</button>
+        <button onclick="aggiungiSegno('/')">/</button>
+        <button onclick="calcolaRisultato()">Calcola</button>
+    </div>
+
     <div id="boxRisultato" style="margin-top: 15px; font-weight: bold;"></div>
 
-
     <script>
+        // Aggiunge il segno cliccato al campo di testo
+        function aggiungiSegno(segno) {
+            document.getElementById("campoTesto").value += segno;
+        }
+
         function calcolaRisultato() {
-           
             let espressione = document.getElementById("campoTesto").value;
-           
-            try {
-           
-                let parti = espressione.split('+');
-               
-                let totale = 0;
-               
-               
-                for (let i = 0; i < parti.length; i++) {
-                    totale += Number(parti[i]);
-                }
-               
-               
-                document.getElementById("boxRisultato").innerText = "Risultato: " + totale;
-               
-            } catch (errore) {
-               
-                document.getElementById("boxRisultato").innerText = "C'è un errore nell'espressione!";
+            let box = document.getElementById("boxRisultato");
+            
+            let operatore = "";
+            
+            // 1. Cerchiamo quale segno è stato inserito
+            if (espressione.includes('+')) operatore = '+';
+            else if (espressione.includes('-')) operatore = '-';
+            else if (espressione.includes('*')) operatore = '*';
+            else if (espressione.includes('/')) operatore = '/';
+
+            // 2. Dividiamo l'espressione usando il segno trovato
+            let parti = espressione.split(operatore);
+            let num1 = Number(parti[0]);
+            let num2 = Number(parti[1]);
+            let totale = 0;
+
+            // 3. Eseguiamo l'operazione con lo switch case
+            switch (operatore) {
+                case '+':
+                    totale = num1 + num2;
+                    break;
+                case '-':
+                    totale = num1 - num2;
+                    break;
+                case '*':
+                    totale = num1 * num2;
+                    break;
+                case '/':
+                    if (num2 === 0) {
+                        box.innerText = "Errore: non puoi dividere per zero!";
+                        return;
+                    }
+                    totale = num1 / num2;
+                    break;
+                default:
+                    box.innerText = "Errore: inserisci un'operazione valida (+, -, *, /)";
+                    return;
+            }
+
+            // 4. Controlliamo che i numeri siano validi
+            if (isNaN(totale)) {
+                box.innerText = "C'è un errore nei numeri inseriti!";
+            } else {
+                box.innerText = "Risultato: " + totale;
             }
         }
     </script>
-
 
 </body>
 </html>
