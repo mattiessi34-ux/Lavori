@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Calcolatrice Senza Eval</title>
+</head>
+<body>
+
+
+    <h2>Calcolatrice Semplice</h2>
+   
+    
+    <input type="text" id="campoTesto">
+    <button onclick="calcolaRisultato()">Calcola</button>
+
+
+    
+    <div id="boxRisultato" style="margin-top: 15px; font-weight: bold;"></div>
+
+
+    <script>
+        function calcolaRisultato() {
+           
+            let espressione = document.getElementById("campoTesto").value;
+           
+            try {
+           
+                let parti = espressione.split('+');
+               
+                let totale = 0;
+               
+               
+                for (let i = 0; i < parti.length; i++) {
+                    totale += Number(parti[i]);
+                }
+               
+               
+                document.getElementById("boxRisultato").innerText = "Risultato: " + totale;
+               
+            } catch (errore) {
+               
+                document.getElementById("boxRisultato").innerText = "C'è un errore nell'espressione!";
+            }
+        }
+    </script>
+
+
+</body>
+</html>
